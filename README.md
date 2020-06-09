@@ -11,14 +11,14 @@ You are the tech lead for SuperForm Inc. and have been tasked with building the 
 The purpose of the Application Form is to render a `<form/>` with a set of questions to the user which will let them apply for credit. However, the set of questions depends on what "Bank" is lending the money. For this excersise we've partnered up with the following banks:
 
 - Bank of Azeroth
-- Aztec Bank
-- Banco de Bank
+- Naboo Bank
+- Middle Earth Bank
 
 They all require different fields to be captured from the user, but lucky for you your backend colleagues have written an API that returns all the information you need to build the front end.
 
 ### `GET /api/lender/<lender>`
 
-See an example response for `GET /api/lender/bank_of_azeroth`.
+See an example response for `GET /api/lender/bank-of-azeroth`.
 
 ```
 {
