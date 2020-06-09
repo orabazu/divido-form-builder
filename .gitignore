@@ -1,0 +1,22 @@
+# dist
+.next
+
+# deps
+node_modules
+public
+
+# yarn
+yarn-error.log
+
+# logs
+logs
+
+# env
+.env
+
+# config files
+.idea
+.vscode
+
+# osx
+.DS_Store
