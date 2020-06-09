@@ -1,14 +1,7 @@
-import Link from 'next/link'
+import { FC } from "react"
 
-const IndexPage = () => (
-  <div>
-    <h1>Hello Next.js 👋</h1>
-    <p>
-      <Link href="/about">
-        <a>About</a>
-      </Link>
-    </p>
-  </div>
+const IndexPage: FC = () => (
+  <h1>Hello 👋</h1>
 )
 
 export default IndexPage
