@@ -1,68 +1,119 @@
-import { FC } from "react"
-
-const EXAMPLE_REQUEST_PAYLOAD = {
-  "first_name": "Ann",
-  "last_name": "Heselden",
-  "gender": "female",
-  "email": "ann.heselden@divido.com",
-  "phone_number": "+447473468883",
-  "monthly_income": 50000
-};
+import { FC } from 'react';
 
 const IndexPage: FC = () => (
-  <div style={{width: '600px', margin: '0 auto'}}>
-    <h1>Hello 👋</h1>
-    <p>Thank you for taking the time to do our technical test.</p>
-    <p>You will build a website that let's user apply for credit online. We've bootstrapped the project for you using `Next.js`, and has the backend API's that you will use ready to go!</p>
-    <h2>Background</h2>
-    <p>You are the tech lead for SuperForm Inc. and have been tasked with building the Front End architecture for a new Web Application called "Application Form".</p>
-    <p>The purpose of the Application Form is to render a form with a set of questions to the user which will let them apply for credit. However, the set of questions depends on what "Bank" is lending the money. For this excersise we've partnered up with the following banks:</p>
+  <div
+    style={{
+      maxWidth: '800px',
+      margin: '0 auto',
+    }}
+  >
+    <h1 id="frontend-code-test">Frontend Code Test</h1>
+    <p>Hey 👋, thanks for taking the time to do our technical test!</p>
+    <p>
+      Checkout the project on{' '}
+      <a href="https://github.com/dividohq/frontend-code-test">Github</a>.
+    </p>
+
+    <h2 id="task">Task</h2>
+    <p>
+      Your goal is to build a product called Application Form. This product will
+      dynamically generate a form based on data received from an API using React
+      and GraphQL. Use GraphQL as a proxy between the frontend and the REST
+      APIs.
+    </p>
+    <p>There are three banks requesting an Application Form:</p>
     <ul>
       <li>Bank of Azeroth</li>
       <li>Naboo Bank</li>
       <li>Middle Earth Bank</li>
     </ul>
-    <p>They all require different fields to be captured from the user, but lucky for you your backend colleagues have written an API that returns all the information you need to build the front end.</p>
+
+    <h3 id="requirements">Requirements</h3>
+    <pre>
+      <code>As a user</code>
+      <br />
+      <code>When I go to /:lender-name </code>
+      <br />
+      <code>I want to see the form for the lender</code>
+      <br />
+      <code>So that I can apply for a bank loan</code>
+    </pre>
+    <pre>
+      <code>As a user </code>
+      <br />
+      <code>When I submit the form</code>
+      <br />
+      <code>I want to know if I was accepted or declined</code>
+    </pre>
+
+    <h3 id="rest-apis">REST APIs</h3>
+
+    <p>You can get the form fields needed for each bank through the endpoints below.</p>
     <ul>
-      <li><code><a href="/api/lenders/bank-of-azeroth">GET /api/lenders/bank-of-azeroth</a></code></li>
-      <li><code><a href="/api/lenders/naboo-bank">GET /api/lenders/naboo-bank</a></code></li>
-      <li><code><a href="/api/lenders/middle-earth-bank">GET /api/lenders/middle-earth-bank</a></code></li>
+      <li>
+        <code>
+          <a href="/api/lenders/bank-of-azeroth">
+            GET /api/lenders/bank-of-azeroth
+          </a>
+        </code>
+      </li>
+      <li>
+        <code>
+          <a href="/api/lenders/naboo-bank">GET /api/lenders/naboo-bank</a>
+        </code>
+      </li>
+      <li>
+        <code>
+          <a href="/api/lenders/middle-earth-bank">
+            GET /api/lenders/middle-earth-bank
+          </a>
+        </code>
+      </li>
     </ul>
+
     <p>There's also an endpoint where you can submit the form to, which will render a decision, accepted or declined.</p>
     <ul>
-      <li><code>POST /api/lender/...</code></li>
+      <li><code>POST /api/lender/INSERT_BANK</code></li>
     </ul>
-    <p>See example of request payload for Bank of Azeroth below.</p>
+
+    <h2 id="ux-and-design">UX and Design</h2>
+    <p>
+      It’s entirely up to you how you would like to design the Application Form!
+      Feel free to use 3rd party tools like <code>emotion</code> or{' '}
+      <code>material-ui</code>.
+    </p>
+
+    <h2 id="testing">Testing</h2>
+    <p>
+      Feel free to add tests if you want, or present what tests you would add if
+      you had more time.
+    </p>
+
+    <h2 id="getting-started">Running the project</h2>
     <pre>
-      <code>
-        {JSON.stringify(EXAMPLE_REQUEST_PAYLOAD, null, 2)}
-      </code>
+      <code>yarn &amp;&amp; yarn dev</code>
     </pre>
-    <h2>Requirements</h2>
-    <ul>
-      <li><code><a href="/bank-of-azeroth">/bank-of-azeroth</a> should render the form fields for Bank of Azeroth</code></li>
-      <li><code><a href="/naboo-bank">/naboo-bank</a> should render the form fields for Naboo Bank</code></li>
-      <li><code><a href="/middle-earth-bank">/middle-earth-bank</a> should render the form fields for Middle Earth Bank</code></li>
-      <li><code>When the form is submitted user should get information about the decision</code></li>
-    </ul>
-    <h2>Implementation</h2>
-    <ul>
-      <li>Use React as the framework</li>
-      <li>Write in TypeScript</li>
-      <li>Build a GraphQL API that the frontend will talk to</li>
-    </ul>
-    <h2>Design</h2>
-    <p>It’s entirely up to you how you would like to design the Application Form!</p>
-    <h2>Testing</h2>
-    <p>Feel free to add tests if you want, atleast think about what tests you would to write.</p>
-    <h2>Follow up questions</h2>
+    <p>
+      or open with{' '}
+      <a href="https://githubbox.com/dividohq/frontend-code-test/tree/docs/simplify-readme">
+        CodeSandbox
+      </a>
+    </p>
+
+    <h2 id="follow-up-questions">Follow up questions</h2>
     <ol>
-      <li>How would you setup front end validation?</li>
-      <li>What if a lender would have certain front end validation, different from the other lenders - how would you solve that?</li>
-      <li>What if Lender B would like `monthly_income` to be a select element with different options instead of input?</li>
-      <li>How would you write tests for this application?</li>
+      <li>How would you setup frontend validation?</li>
+      <li>
+        What if a lender has different frontend validation than the other
+        lenders - how would you solve that?
+      </li>
+      <li>
+        What if a lender would like <code>monthly_income</code> to be a select
+        element instead of input?
+      </li>
+      <li>How would you write tests for this product?</li>
     </ol>
   </div>
-)
+);
 
-export default IndexPage
+export default IndexPage;
