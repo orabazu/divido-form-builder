@@ -11,6 +11,18 @@ export interface LenderGetResponse {
   >;
 }
 
+export interface LenderGetResponseExtended {
+  name: string;
+  fields: Array<LenderFields>;
+}
+
+export interface LenderFields {
+  name: string;
+  type: string;
+  required: boolean;
+  options?: Array<string>;
+}
+
 export interface LenderPostResponse {
   decision: 'accepted' | 'declined';
 }

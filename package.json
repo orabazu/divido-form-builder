@@ -5,10 +5,12 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
+    "test:cypress": "npx cypress open",
     "type-check": "tsc"
   },
   "dependencies": {
-    "next": "latest",
+    "@material-ui/core": "^4.11.0",
+    "next": "^9.5.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
@@ -18,8 +20,10 @@
     "@types/react-dom": "^16.9.4",
     "@typescript-eslint/eslint-plugin": "^3.2.0",
     "@typescript-eslint/parser": "^3.2.0",
+    "cypress": "^4.11.0",
     "eslint": "^7.2.0",
     "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-cypress": "^2.11.1",
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^4.0.4",

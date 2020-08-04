@@ -12,6 +12,27 @@ There are three banks requesting an Application Form:
 - Naboo Bank
 - Middle Earth Bank
 
+## Pre-requisites
+
+1. Git
+2. Node: any 12.x version starting with v12.0.0 or greater
+3. Yarn: See [Yarn](https://yarnpkg.com/getting-started/install) website for installation instructions
+4. A clone of the frontend-code-test repo on your local machine
+
+## Installation
+
+```bash
+yarn install
+```
+to install the website's npm dependencies
+
+## Running the project
+
+```bash
+yarn dev
+```
+to start the development server (powered by [NextJS](https://nextjs.org/))
+
 ### Requirements
 
 ```
@@ -63,25 +84,14 @@ I want to know if I was accepted or declined
 
 ## UX and Design
 
-It’s entirely up to you how you would like to design the Application Form! Feel free to use 3rd party tools like `emotion` or `material-ui`.
+It’s entirely up to you how you would like to design the Application Form! Feel free to use 3rd party tools like `emotion` or `material-ui` (already installed as a dependency).
 
 ## Testing
 
-Feel free to add tests if you want, or present what tests you would add if you had more time.
-
-## Running the project
-
 ```bash
-yarn && yarn dev
+yarn test:cypress
 ```
+will run our Cypress tests.
 
-or open with [CodeSandbox](https://githubbox.com/dividohq/frontend-code-test/tree/docs/simplify-readme).
+Feel free to add some more end-to-end cypress tests, or present what tests you would add if you had more time.
 
-## Follow up Questions
-
-- How would you setup frontend validation?
-- What if a lender has different frontend validation than the other
-  lenders - how would you solve that?
-- What if a lender would like `monthly_income` to be a select element
-  instead of input?
-- How would you write tests for this product?
