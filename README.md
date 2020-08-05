@@ -4,7 +4,7 @@ Hey :wave:, thanks for taking the time to do our technical test!
 
 ## Task
 
-Your goal is to build a product called Application Form. This product will dynamically generate a form based on data received from an API using React and GraphQL. Use GraphQL as a proxy between the frontend and the REST APIs.
+Your goal is to build a product called Application Form. This product will dynamically generate a form based on data received from an API using React.
 
 There are three banks requesting an Application Form:
 
