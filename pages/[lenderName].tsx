@@ -1,13 +1,12 @@
-import React, { FC } from 'react';
 import { useRouter } from 'next/router';
-
 import { Grid } from '@material-ui/core';
+import { NextPage } from 'next';
 
-const lenderNamePage: FC = () => {
+const LenderNamePage: NextPage = () => {
   const router = useRouter();
   const lenderSlug = router.query.lenderName?.toString();
 
   return <Grid container>{lenderSlug}</Grid>;
 };
 
-export default lenderNamePage;
+export default LenderNamePage;

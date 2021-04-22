@@ -25,8 +25,7 @@ context('Home Page', () => {
   });
 
   it('will check if all important elements are in place:', () => {
-    // Names and links for each bank should be visible for the user:
-    this.lenders.forEach((lender) => {
+    this.lenders.forEach((lender: LenderFixture) => {
       cy.get(`[data-testid="${lender.slug}"]`)
         .should('be.visible')
         .should('contain', lender.name);
@@ -34,12 +33,16 @@ context('Home Page', () => {
   });
 
   it('will check if all important links are in place and take the user to correct URL', () => {
-    // Names and links for each bank should be visible for the user:
-    this.lenders.forEach((lender) => {
-      cy.get(`[data-testid="${lender.slug}"]`)
-        .should('be.visible')
-        .should('contain', lender.name)
-        .should('have.attr', 'href');
+    this.lenders.forEach((lender: LenderFixture) => {
+      cy.get(`[data-testid="${lender.slug}"]`).as('lenderLink');
+
+      cy.get('@lenderLink').should('be.visible').should('contain', lender.name);
+
+      cy.get('@lenderLink').click();
+
+      cy.location('pathname').should('contain', `/${lender.slug}`);
+
+      cy.go('back');
     });
   });
 });

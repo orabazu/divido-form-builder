@@ -1,7 +1,7 @@
 import { Typography, Link, List, ListItem } from '@material-ui/core';
 import { NextPage } from 'next';
 
-const IndexPage: NextPage = () => {
+const HomePage: NextPage = () => {
   const lenders = [
     { name: 'Bank of Azeroth', slug: 'bank-of-azeroth' },
     { name: 'Middle Earth Bank', slug: 'middle-earth-bank' },
@@ -16,10 +16,7 @@ const IndexPage: NextPage = () => {
       <List>
         {lenders.map((lender) => (
           <ListItem key={lender.name}>
-            <Link
-              data-testid={lender.slug}
-              href={`/api/lenders/${lender.slug}`}
-            >
+            <Link data-testid={lender.slug} href={`/${lender.slug}`}>
               {lender.name}
             </Link>
           </ListItem>
@@ -29,4 +26,4 @@ const IndexPage: NextPage = () => {
   );
 };
 
-export default IndexPage;
+export default HomePage;
