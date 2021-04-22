@@ -24,6 +24,7 @@ There are three banks requesting an Application Form:
 ```bash
 yarn install
 ```
+
 to install the website's npm dependencies
 
 ## Running the project
@@ -31,6 +32,7 @@ to install the website's npm dependencies
 ```bash
 yarn dev
 ```
+
 to start the development server (powered by [NextJS](https://nextjs.org/))
 
 ### Requirements
@@ -91,7 +93,7 @@ It’s entirely up to you how you would like to design the Application Form! Fee
 ```bash
 yarn test:cypress
 ```
+
 will run our Cypress tests.
 
 Feel free to add some more end-to-end cypress tests, or present what tests you would add if you had more time.
-
