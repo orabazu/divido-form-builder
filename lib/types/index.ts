@@ -1,3 +1,6 @@
+import { Input } from "@material-ui/core";
+import { BANKS } from "pages/api/lenders";
+
 export interface LenderGetResponse {
   name: string;
   fields: Array<
@@ -25,4 +28,23 @@ export interface LenderFields {
 
 export interface LenderPostResponse {
   decision: 'accepted' | 'declined';
+}
+
+
+export interface BanksGetResponse {
+  banks: Array<
+    BANKS
+  >;
+}
+
+
+export enum COMPONENTS {
+  'first_name' = Input,
+  | 'first_name'
+  | 'last_name'
+  | 'email'
+  | 'date_of_birth'
+  | 'monthly_income'
+  | 'gender'
+  | 'address'
 }

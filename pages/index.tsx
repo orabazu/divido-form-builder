@@ -1,5 +1,7 @@
 import { Typography, Link, List, ListItem } from '@material-ui/core';
-import { NextPage } from 'next';
+import { GetStaticProps, NextPage } from 'next';
+import { server } from 'config';
+import { BANKS } from './api/lenders';
 
 const HomePage: NextPage = () => {
   const lenders = [
@@ -25,5 +27,7 @@ const HomePage: NextPage = () => {
     </>
   );
 };
+
+
 
 export default HomePage;

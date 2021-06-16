@@ -6,7 +6,8 @@
     "build": "next build",
     "start": "next start",
     "test:cypress": "npx cypress open",
-    "type-check": "tsc"
+    "type-check": "tsc",
+    "debug": "NODE_OPTIONS='--inspect' next dev"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
