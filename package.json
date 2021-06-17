@@ -6,10 +6,12 @@
     "build": "next build",
     "start": "next start",
     "test:cypress": "npx cypress open",
-    "type-check": "tsc"
+    "type-check": "tsc",
+    "debug": "NODE_OPTIONS='--inspect' next dev"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
+    "formik": "^2.2.9",
     "next": "^10.1.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
