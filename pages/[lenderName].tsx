@@ -18,7 +18,7 @@ import {
   LenderGetResponse,
   LenderGetResponseExtended,
 } from 'lib/types';
-import { createComponent } from 'lib/types/utils';
+import { createComponent } from 'lib/utils';
 
 import styles from '../styles/lenderName.module.css';
 type Props = {

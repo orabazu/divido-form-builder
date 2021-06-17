@@ -1,12 +1,12 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
-import { LenderFields } from '..';
+import { LenderFields } from '../types';
 
 const TextField = dynamic(() => import('@material-ui/core/TextField'));
 const Chip = dynamic(() => import('@material-ui/core/Chip'));
-const Checkbox = dynamic(() => import('@material-ui/core/Checkbox'));
-const Radio = dynamic(() => import('../../../components/Radiox'));
+const Checkbox = dynamic(() => import('components/CheckboxComponent'));
+const Radio = dynamic(() => import('components/RadioComponent'));
 
 const getActualComponent = (
   fieldName: string | LenderFields,
@@ -18,7 +18,7 @@ const getActualComponent = (
   let res;
   let isStr = typeof fieldName === 'string';
   let componentType = isStr ? fieldName : (fieldName as LenderFields).type;
-  const label = isStr ? fieldName : (fieldName as LenderFields).name;
+  const label = isStr ? getLabel()[fieldName as string] : getLabel()[(fieldName as LenderFields).name];
   const name = isStr ? fieldName : (fieldName as LenderFields).name;
   let componentProps = isStr ? {} : fieldName;
   switch (componentType) {
@@ -109,14 +109,6 @@ const getActualComponent = (
   return res;
 };
 
-// | 'first_name'
-// | 'last_name'
-// | 'email'
-// | 'date_of_birth'
-// | 'monthly_income'
-// | 'gender'
-// | 'address'
-
 export const createComponent = (
   fieldName: string | LenderFields,
   handleChange: (e: React.ChangeEvent<any>) => void,
@@ -124,3 +116,13 @@ export const createComponent = (
   const { component, props } = getActualComponent(fieldName, handleChange);
   return React.createElement(component, props, 'asdd');
 };
+
+export const getLabel = () :{[k:string]: string} => ({
+  first_name: 'First Name',
+  last_name: 'Last Name',
+  email: 'Email',
+  gender: 'Gender',
+  monthly_income: 'Monthly Income',
+  date_of_birth: 'Date of Birth',
+  contractor: 'Contractor'
+})
