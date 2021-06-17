@@ -144,15 +144,19 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const res = await fetch(
     `${server}/api/lenders/${
       context.params?.lenderName ? context.params?.lenderName : ''
-    }`,{
+    }`,
+    {
       headers: {
         // update with your user-agent
-        "User-Agent":
-          "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36",
-        Accept: "application/json; charset=UTF-8",
+        'User-Agent':
+          'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36',
+        Accept: 'application/json; charset=UTF-8',
       },
-    }
+    },
   );
+
+  if (res.status !== 200)
+      throw String(`Invalid server response: ${res.status} ${res.statusText}`);
 
   const lenderData = await res.json();
   return {
@@ -163,7 +167,17 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const getStaticPaths = async () => {
-  const res = await fetch(`${server}/api/lenders`);
+  const res = await fetch(`${server}/api/lenders`, {
+    headers: {
+      // update with your user-agent
+      'User-Agent':
+        'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36',
+      Accept: 'application/json; charset=UTF-8',
+    },
+  });
+
+  if (res.status !== 200)
+      throw String(`Invalid server response: ${res.status} ${res.statusText}`);
 
   const { banks } = await res.json();
 
