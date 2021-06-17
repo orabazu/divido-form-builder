@@ -2,7 +2,6 @@ import React, { ReactNode, useState } from 'react';
 import { useRouter } from 'next/router';
 import { GetStaticProps, NextPage } from 'next';
 import Image from 'next/image';
-
 import { Grid } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
@@ -10,11 +9,6 @@ import Snackbar from '@material-ui/core/Snackbar';
 import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
-
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-
 import { Formik } from 'formik';
 
 import { server } from 'config';
