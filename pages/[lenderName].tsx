@@ -1,9 +1,19 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { useRouter } from 'next/router';
 import { GetStaticProps, NextPage } from 'next';
+import Image from 'next/image';
+
 import { Grid } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import Typography from '@material-ui/core/Typography';
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import Link from '@material-ui/core/Link';
+
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 
 import { Formik } from 'formik';
 
@@ -14,73 +24,124 @@ import {
   LenderGetResponse,
   LenderGetResponseExtended,
 } from 'lib/types';
-
 import { createComponent } from 'lib/types/utils';
 
+import styles from '../styles/lenderName.module.css';
 type Props = {
   children?: ReactNode;
 } & {
   lenderData?: LenderGetResponse | LenderGetResponseExtended; // TODO add type here
 };
 
-const renderForm = (component: string | LenderFields, handleChange: (e: React.ChangeEvent<any>) => void) => {
+const renderForm = (
+  component: string | LenderFields,
+  handleChange: (e: React.ChangeEvent<any>) => void,
+) => {
   if (typeof component !== 'undefined') {
-    console.log(component);
     return createComponent(component, handleChange);
   }
 };
 
-const onSubmit = (value: any): void => {
-  console.log(value);
+const onSubmite = async (
+  values: any,
+  lenderSlug: any,
+): Promise<{ decision: string }> => {
+  const rawRes = await fetch(`${server}/api/lenders/${lenderSlug}`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(values),
+  });
+
+  const res = await rawRes.json();
+  return res;
 };
 
 const LenderNamePage: NextPage = ({ lenderData }: Props) => {
   const router = useRouter();
   const lenderSlug = router.query.lenderName?.toString();
-  console.log(lenderData, '231321');
+  const [decision, setDecision] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleSnackBar = (
+    _event: React.SyntheticEvent | React.MouseEvent,
+    reason?: string,
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setIsOpen(false);
+  };
+
+  const renderSnackBar = (isOpen: boolean, message: string | null) => {
+    return (
+      <Snackbar
+        open={isOpen}
+        autoHideDuration={1000}
+        onClose={handleSnackBar}
+        message={message}
+      />
+    );
+  };
+
   return (
-    <Container maxWidth="sm">
-      {lenderSlug} -- {lenderData?.name}{' '}
-      <Formik
-        initialValues={{}}
-        onSubmit={(values) => {
-          console.log(values,'2321323213')
-          alert(values)
-          onSubmit(values);
-        }}
-      >
-        {(formik) => {
-          const {
-            //   errors,
-            //   touched,
-            //   isValid,
-            //   dirty,
-              handleChange,
-            // handleSubmit,
-            //   values,
-            submitForm
-          } = formik;
-          console.log(formik);
-          return (
-            <form onSubmit={submitForm}>
-              <Grid
-                container
-                direction="column"
-                justify="center"
-                alignItems="stretch"
-              >
-                {lenderData?.fields.map((component: string | LenderFields) =>
-                  renderForm(component, handleChange),
-                )}
-                <Button variant="contained" color="primary" type="submit">
-                  Primary
-                </Button>
-              </Grid> 
-            </form>
-          );
-        }}
-      </Formik>
-      {/* <Typography2>jojo</Typography2> */}
+    <Container maxWidth="lg">
+      <Grid container spacing={2}>
+        <Grid item>
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link color="inherit" href="/">
+              Home
+            </Link>
+            <Typography color="textPrimary">{lenderSlug}</Typography>
+          </Breadcrumbs>
+          <Image
+            width="auto"
+            height="250px"
+            src={`/${lenderSlug}.svg`}
+            className={styles.Image}
+          />
+        </Grid>
+        <Grid item>
+          <Typography variant="h2" gutterBottom>
+            {lenderData?.name}
+          </Typography>
+          <Formik
+            initialValues={{}}
+            onSubmit={async (values) => {
+              const res = await onSubmite(values, lenderSlug);
+
+              setIsOpen(true);
+              setDecision(res.decision);
+            }}
+          >
+            {(formik) => {
+              const { handleChange, handleSubmit } = formik;
+              return (
+                <form onSubmit={handleSubmit}>
+                  <Grid
+                    container
+                    direction="column"
+                    justify="center"
+                    alignItems="stretch"
+                  >
+                    {lenderData?.fields.map(
+                      (component: string | LenderFields) =>
+                        renderForm(component, handleChange),
+                    )}
+                    <Button variant="contained" color="primary" type="submit">
+                      Register
+                    </Button>
+                  </Grid>
+                </form>
+              );
+            }}
+          </Formik>
+          {renderSnackBar(isOpen, decision)}
+        </Grid>
+      </Grid>
     </Container>
   );
 };
@@ -90,10 +151,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
     `${server}/api/lenders/${
       context.params?.lenderName ? context.params?.lenderName : ''
     }`,
-  ); // TODO remove !
+  );
 
   const lenderData = await res.json();
-  console.log(lenderData, 'lenderData');
   return {
     props: {
       lenderData,
@@ -105,8 +165,6 @@ export const getStaticPaths = async () => {
   const res = await fetch(`${server}/api/lenders`);
 
   const { banks } = await res.json();
-
-  console.log(banks);
 
   const paths = banks.map((b: BANKS) => ({ params: { lenderName: b } }));
 

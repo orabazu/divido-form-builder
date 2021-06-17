@@ -3,26 +3,12 @@ import dynamic from 'next/dynamic';
 const Radio = dynamic(() =>
   import('@material-ui/core/Radio').finally(() => console.log('loaded radio')),
 );
-const RadioGroup = dynamic(() =>
-  import('@material-ui/core/RadioGroup').finally(() =>
-    console.log('loaded radio'),
-  ),
+const RadioGroup = dynamic(() => import('@material-ui/core/RadioGroup'));
+const FormControlLabel = dynamic(
+  () => import('@material-ui/core/FormControlLabel'),
 );
-const FormControlLabel = dynamic(() =>
-  import('@material-ui/core/FormControlLabel').finally(() =>
-    console.log('loaded radio'),
-  ),
-);
-const FormControl = dynamic(() =>
-  import('@material-ui/core/FormControl').finally(() =>
-    console.log('loaded radio'),
-  ),
-);
-const FormLabel = dynamic(() =>
-  import('@material-ui/core/FormLabel').finally(() =>
-    console.log('loaded radio'),
-  ),
-);
+// const FormControl = dynamic(() => import('@material-ui/core/FormControl'));
+// const FormLabel = dynamic(() => import('@material-ui/core/FormLabel'));
 
 // import FormControlLabel from '@material-ui/core/FormControlLabel';
 // import FormControl from '@material-ui/core/FormControl';

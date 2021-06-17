@@ -1,40 +1,26 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
-import { LenderFields, LenderGetResponse } from '..';
+import { LenderFields } from '..';
 
-const TextField = dynamic(() =>
-  import('@material-ui/core/TextField').finally(() =>
-    console.log('loaded TextField'),
-  ),
-);
-
-const Chip = dynamic(() =>
-  import('@material-ui/core/Chip').finally(() => console.log('loaded Chip')),
-);
-
-const Checkbox = dynamic(() =>
-  import('@material-ui/core/Checkbox').finally(() => console.log('loaded Checkbox')),
-);
-
-const Radio = dynamic(() =>
-  import('../../../components/Radiox').finally(() => console.log('loaded radio')),
-);
-
+const TextField = dynamic(() => import('@material-ui/core/TextField'));
+const Chip = dynamic(() => import('@material-ui/core/Chip'));
+const Checkbox = dynamic(() => import('@material-ui/core/Checkbox'));
+const Radio = dynamic(() => import('../../../components/Radiox'));
 
 const getActualComponent = (
   fieldName: string | LenderFields,
-  handleChange: (e: React.ChangeEvent<any>) => void
+  handleChange: (e: React.ChangeEvent<any>) => void,
 ): {
   component: React.ComponentType<any>;
   props: React.ComponentProps<any>;
 } => {
   let res;
-  let isStr = typeof fieldName === 'string'
-  let componentType =  isStr ? fieldName : (fieldName as LenderFields).type
-  const label = isStr ? fieldName : (fieldName as LenderFields).name
-  const name = isStr ? fieldName : (fieldName as LenderFields).name
-  let componentProps = isStr ? {} : fieldName
+  let isStr = typeof fieldName === 'string';
+  let componentType = isStr ? fieldName : (fieldName as LenderFields).type;
+  const label = isStr ? fieldName : (fieldName as LenderFields).name;
+  const name = isStr ? fieldName : (fieldName as LenderFields).name;
+  let componentProps = isStr ? {} : fieldName;
   switch (componentType) {
     case 'first_name':
     case 'last_name':
@@ -58,7 +44,7 @@ const getActualComponent = (
           label,
           name,
           onChange: handleChange,
-          ...componentProps
+          ...componentProps,
         },
       };
       break;
@@ -70,7 +56,7 @@ const getActualComponent = (
           label,
           name,
           onChange: handleChange,
-          ...componentProps
+          ...componentProps,
         },
       };
       break;
@@ -82,7 +68,7 @@ const getActualComponent = (
           label,
           name,
           onChange: handleChange,
-          ...componentProps
+          ...componentProps,
         },
       };
       break;
@@ -95,7 +81,7 @@ const getActualComponent = (
           label,
           name,
           onChange: handleChange,
-          ...componentProps
+          ...componentProps,
         },
       };
       break;
@@ -106,7 +92,7 @@ const getActualComponent = (
           label,
           name,
           onChange: handleChange,
-          ...componentProps
+          ...componentProps,
         },
       };
       break;
@@ -131,7 +117,10 @@ const getActualComponent = (
 // | 'gender'
 // | 'address'
 
-export const createComponent = (fieldName: string | LenderFields, handleChange: (e: React.ChangeEvent<any>) => void) => {
+export const createComponent = (
+  fieldName: string | LenderFields,
+  handleChange: (e: React.ChangeEvent<any>) => void,
+) => {
   const { component, props } = getActualComponent(fieldName, handleChange);
   return React.createElement(component, props, 'asdd');
 };

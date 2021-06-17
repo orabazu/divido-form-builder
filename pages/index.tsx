@@ -3,6 +3,7 @@ import { GetStaticProps, NextPage } from 'next';
 import { server } from 'config';
 import { BANKS } from './api/lenders';
 
+
 const HomePage: NextPage = () => {
   const lenders = [
     { name: 'Bank of Azeroth', slug: 'bank-of-azeroth' },
