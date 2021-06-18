@@ -1,7 +1,8 @@
-.Image{
+.Image {
   padding: 1rem !important;
 }
-global .MuiFormControl-root {
 
-  padding: 20px;
+.Button {
+  width: 100%;
+  margin-top: 10px!important;
 }

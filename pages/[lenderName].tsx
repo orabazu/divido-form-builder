@@ -9,6 +9,8 @@ import Snackbar from '@material-ui/core/Snackbar';
 import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
+
+
 import { Formik } from 'formik';
 
 import { server } from 'config';
@@ -125,7 +127,12 @@ const LenderNamePage: NextPage = ({ lenderData }: Props) => {
                       (component: string | LenderFields) =>
                         renderForm(component, handleChange),
                     )}
-                    <Button variant="contained" color="primary" type="submit">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                      className={styles.Button}
+                    >
                       Register
                     </Button>
                   </Grid>
