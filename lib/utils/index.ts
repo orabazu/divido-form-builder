@@ -8,96 +8,97 @@ const Chip = dynamic(() => import('@material-ui/core/Chip'));
 const Checkbox = dynamic(() => import('components/CheckboxComponent'));
 const Radio = dynamic(() => import('components/RadioComponent'));
 
-const getActualComponent = (
+const getComponentWithProps = (
   fieldName: string | LenderFields,
   handleChange: (e: React.ChangeEvent<any>) => void,
 ): {
   component: React.ComponentType<any>;
   props: React.ComponentProps<any>;
 } => {
-  let res;
-  let isStr = typeof fieldName === 'string';
-  let componentType = isStr ? fieldName : (fieldName as LenderFields).type;
+  let component;
+  const isStr = typeof fieldName === 'string';
+  const componentType = isStr ? fieldName : (fieldName as LenderFields).type;
   const label = isStr ? getLabel()[fieldName as string] : getLabel()[(fieldName as LenderFields).name];
   const name = isStr ? fieldName : (fieldName as LenderFields).name;
-  let componentProps = isStr ? {} : fieldName;
+  const defaultProps = isStr ? {} : fieldName;
+
   switch (componentType) {
     case 'first_name':
     case 'last_name':
     case 'text':
-      res = {
+      component = {
         component: TextField,
         props: {
           type: 'text',
           label,
           name,
           onChange: handleChange,
-          ...componentProps,
+          ...defaultProps,
         },
       };
       break;
     case 'email':
-      res = {
+      component = {
         component: TextField,
         props: {
           type: 'email',
           label,
           name,
           onChange: handleChange,
-          ...componentProps,
+          ...defaultProps,
         },
       };
       break;
     case 'date_of_birth':
-      res = {
+      component = {
         component: TextField,
         props: {
           type: 'date',
           label,
           name,
           onChange: handleChange,
-          ...componentProps,
+          ...defaultProps,
         },
       };
       break;
     case 'monthly_income':
-      res = {
+      component = {
         component: TextField,
         props: {
           type: 'number',
           label,
           name,
           onChange: handleChange,
-          ...componentProps,
+          ...defaultProps,
         },
       };
       break;
     case 'gender':
     case 'select':
-      res = {
+      component = {
         component: Radio,
         props: {
           type: 'number',
           label,
           name,
           onChange: handleChange,
-          ...componentProps,
+          ...defaultProps,
         },
       };
       break;
     case 'checkbox':
-      res = {
+      component = {
         component: Checkbox,
         props: {
           label,
           name,
           onChange: handleChange,
-          ...componentProps,
+          ...defaultProps,
         },
       };
       break;
     default:
-      res = {
+      component = {
         component: Chip,
         props: {
           label: 'Unknown Component',
@@ -106,16 +107,17 @@ const getActualComponent = (
       break;
   }
 
-  return res;
+  return component;
 };
 
 export const createComponent = (
   fieldName: string | LenderFields,
   handleChange: (e: React.ChangeEvent<any>) => void,
 ) => {
-  const { component, props } = getActualComponent(fieldName, handleChange);
+  const { component, props } = getComponentWithProps(fieldName, handleChange);
   return React.createElement(component, props, 'asdd');
 };
+
 
 export const getLabel = () :{[k:string]: string} => ({
   first_name: 'First Name',
