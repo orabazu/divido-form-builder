@@ -38,9 +38,9 @@ const renderForm = (
   }
 };
 
-const onSubmite = async (
-  values: any,
-  lenderSlug: any,
+const addLenders = async (
+  values: {[k:string]: string | boolean},
+  lenderSlug: string | undefined,
 ): Promise<{ decision: string }> => {
   const rawRes = await fetch(`${server}/api/lenders/${lenderSlug}`, {
     method: 'POST',
@@ -107,7 +107,7 @@ const LenderNamePage: NextPage = ({ lenderData }: Props) => {
           <Formik
             initialValues={{}}
             onSubmit={async (values) => {
-              const res = await onSubmite(values, lenderSlug);
+              const res = await addLenders(values, lenderSlug);
 
               setIsOpen(true);
               setDecision(res.decision);

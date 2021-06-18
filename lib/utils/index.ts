@@ -17,11 +17,31 @@ const getComponentWithProps = (
 } => {
   let component;
   const isStr = typeof fieldName === 'string';
-  const componentType = isStr ? fieldName : (fieldName as LenderFields).type;
-  const label = isStr ? getLabel()[fieldName as string] : getLabel()[(fieldName as LenderFields).name];
-  const name = isStr ? fieldName : (fieldName as LenderFields).name;
-  const defaultProps = isStr ? {} : fieldName;
+  let componentType : string | LenderFields
+  let label: string
+  let name: string
+  let defaultProps : {}
 
+  if(isStr){
+    componentType = fieldName
+    label = getLabel()[fieldName as string]
+    name = fieldName as string
+    defaultProps = {
+      label,
+      name,
+      onChange: handleChange,
+    }
+  } else {
+    componentType = (fieldName as LenderFields).type;
+    label = getLabel()[(fieldName as LenderFields).name];
+    name = (fieldName as LenderFields).name;
+    defaultProps = {
+      label,
+      onChange: handleChange,
+      ...fieldName as LenderFields,
+    }
+  }
+  
   switch (componentType) {
     case 'first_name':
     case 'last_name':
@@ -30,9 +50,6 @@ const getComponentWithProps = (
         component: TextField,
         props: {
           type: 'text',
-          label,
-          name,
-          onChange: handleChange,
           ...defaultProps,
         },
       };
@@ -42,9 +59,6 @@ const getComponentWithProps = (
         component: TextField,
         props: {
           type: 'email',
-          label,
-          name,
-          onChange: handleChange,
           ...defaultProps,
         },
       };
@@ -54,9 +68,6 @@ const getComponentWithProps = (
         component: TextField,
         props: {
           type: 'date',
-          label,
-          name,
-          onChange: handleChange,
           ...defaultProps,
         },
       };
@@ -66,9 +77,6 @@ const getComponentWithProps = (
         component: TextField,
         props: {
           type: 'number',
-          label,
-          name,
-          onChange: handleChange,
           ...defaultProps,
         },
       };
@@ -79,9 +87,6 @@ const getComponentWithProps = (
         component: Radio,
         props: {
           type: 'number',
-          label,
-          name,
-          onChange: handleChange,
           ...defaultProps,
         },
       };
@@ -90,9 +95,6 @@ const getComponentWithProps = (
       component = {
         component: Checkbox,
         props: {
-          label,
-          name,
-          onChange: handleChange,
           ...defaultProps,
         },
       };
@@ -118,13 +120,12 @@ export const createComponent = (
   return React.createElement(component, props, 'asdd');
 };
 
-
-export const getLabel = () :{[k:string]: string} => ({
+export const getLabel = (): { [k: string]: string } => ({
   first_name: 'First Name',
   last_name: 'Last Name',
   email: 'Email',
   gender: 'Gender',
   monthly_income: 'Monthly Income',
   date_of_birth: 'Date of Birth',
-  contractor: 'Contractor'
-})
+  contractor: 'Contractor',
+});
