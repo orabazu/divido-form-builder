@@ -117,7 +117,7 @@ export const createComponent = (
   handleChange: (e: React.ChangeEvent<any>) => void,
 ) => {
   const { component, props } = getComponentWithProps(fieldName, handleChange);
-  return React.createElement(component, props, 'asdd');
+  return React.createElement(component, props);
 };
 
 export const getLabel = (): { [k: string]: string } => ({

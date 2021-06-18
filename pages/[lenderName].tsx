@@ -10,7 +10,6 @@ import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
 
-
 import { Formik } from 'formik';
 
 import { server } from 'config';
@@ -26,7 +25,7 @@ import styles from '../styles/lenderName.module.css';
 type Props = {
   children?: ReactNode;
 } & {
-  lenderData?: LenderGetResponse | LenderGetResponseExtended; // TODO add type here
+  lenderData?: LenderGetResponse | LenderGetResponseExtended;
 };
 
 const renderForm = (
@@ -39,7 +38,7 @@ const renderForm = (
 };
 
 const addLenders = async (
-  values: {[k:string]: string | boolean},
+  values: { [k: string]: string | boolean },
   lenderSlug: string | undefined,
 ): Promise<{ decision: string }> => {
   const rawRes = await fetch(`${server}/api/lenders/${lenderSlug}`, {
