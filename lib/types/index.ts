@@ -1,3 +1,5 @@
+import { BANKS } from "pages/api/lenders";
+
 export interface LenderGetResponse {
   name: string;
   fields: Array<
@@ -25,4 +27,11 @@ export interface LenderFields {
 
 export interface LenderPostResponse {
   decision: 'accepted' | 'declined';
+}
+
+
+export interface BanksGetResponse {
+  banks: Array<
+    BANKS
+  >;
 }
